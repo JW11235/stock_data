@@ -129,11 +129,18 @@ def get_stk_industry(stock_code=None, begin_date=None):
 
 
 if __name__ == '__main__':
+    import os
     scode = '600000.sh'
-    bdate = dt.datetime(2017, 1, 1)
-    edate = dt.datetime(2017, 12, 31)
+    bdate = dt.datetime(2015, 1, 1)
+    edate = dt.datetime(2021, 9, 1)
     # df = get_stk_market_daily(scode, bdate, edate)
     # df = get_index_market_daily('000001.sh', bdate, edate)
     # df = get_adj_factor(scode, bdate, edate)
-    df = get_stk_industry(scode, bdate)
+    # df = get_stk_industry(scode, bdate)
+    df = get_stk_market_daily(scode, bdate, edate)
+    df['openinterest'] = 0.0
+    df.set_index('date', inplace=True)
+    df.index = pd.to_datetime(df.index, format='%Y-%m-%d')
+    df = df.loc[:, ['open', 'high', 'low', 'close', 'volume', 'openinterest']]
     print(df.head())
+    df.to_csv(os.path.join('..\\db', scode[0:6]+scode[-2:]+'.csv'), encoding='gbk', index=True)
