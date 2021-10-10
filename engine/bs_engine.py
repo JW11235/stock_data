@@ -131,7 +131,7 @@ def get_stk_industry(stock_code=None, begin_date=None):
 if __name__ == '__main__':
     import os
     scode = '600000.sh'
-    bdate = dt.datetime(2015, 1, 1)
+    bdate = dt.datetime(2019, 1, 1)
     edate = dt.datetime(2021, 9, 1)
     # df = get_stk_market_daily(scode, bdate, edate)
     # df = get_index_market_daily('000001.sh', bdate, edate)
